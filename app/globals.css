@@ -123,16 +123,16 @@
 
 @layer utilities {
   .gradient-text {
-    @apply bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent;
   }
   
   .surf-gradient {
-    @apply bg-gradient-to-br from-blue-900 via-blue-800 to-teal-900;
+    @apply bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900;
   }
   
   .wave-pattern {
-    background-image: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                      radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+    background-image: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 40% 40%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
   }
 }

@@ -74,7 +74,7 @@ export function MapView({ spots }: MapViewProps) {
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-center text-sm">
-              <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+              <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
               <span>Beginner Friendly</span>
             </div>
             <div className="flex items-center text-sm">
@@ -99,7 +99,7 @@ export function MapView({ spots }: MapViewProps) {
 function SpotDetails({ spot }: { spot: SurfingSpot }) {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Beginner': return 'bg-green-500';
+      case 'Beginner': return 'bg-blue-500';
       case 'Intermediate': return 'bg-yellow-500';
       case 'Advanced': return 'bg-orange-500';
       case 'Expert': return 'bg-red-500';

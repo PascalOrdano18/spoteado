@@ -114,7 +114,7 @@ export default function LeafletMap({ spots, onSpotSelect }: LeafletMapProps) {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Beginner': return '#10b981'; // green-500
+      case 'Beginner': return '#3b82f6'; // blue-500
       case 'Intermediate': return '#eab308'; // yellow-500
       case 'Advanced': return '#f97316'; // orange-500
       case 'Expert': return '#ef4444'; // red-500
