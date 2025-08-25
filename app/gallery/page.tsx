@@ -4,9 +4,9 @@ export default function GalleryPage() {
   return (
     <div className="container mx-auto p-4">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Photo Gallery</h1>
+        <h1 className="text-3xl font-bold mb-2">Galería de Fotos</h1>
         <p className="text-muted-foreground">
-          Browse photos from Mar del Plata surf spots. Filter by date, location, and more to find specific sessions or surfers.
+          Explora fotos de los spots de surf de Mar del Plata. Filtra por fecha, ubicación y más para encontrar sesiones específicas o surfistas.
         </p>
       </div>
       <PhotoGallery />

@@ -31,11 +31,15 @@ export function Navigation() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           <Link 
-            href="/map" 
+            href="/" 
             className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => {
+              // Scroll to top when clicking Map
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           >
             <Map className="h-4 w-4" />
-            <span>Map</span>
+            <span>Mapa</span>
           </Link>
           <Link 
             href="/spots" 
@@ -49,14 +53,14 @@ export function Navigation() {
             className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
           >
             <Camera className="h-4 w-4" />
-            <span>Gallery</span>
+            <span>Galería</span>
           </Link>
           <Link 
             href="/upload" 
             className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
           >
             <Upload className="h-4 w-4" />
-            <span>Upload</span>
+            <span>Subir</span>
           </Link>
         </nav>
 
@@ -92,12 +96,16 @@ export function Navigation() {
         <div className="md:hidden border-t bg-background">
           <nav className="container flex flex-col space-y-2 p-4">
             <Link 
-              href="/map" 
+              href="/" 
               className="flex items-center space-x-2 py-2 text-muted-foreground hover:text-foreground transition-colors"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                setIsMenuOpen(false);
+                // Scroll to top when clicking Map
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             >
               <Map className="h-4 w-4" />
-              <span>Map</span>
+              <span>Mapa</span>
             </Link>
             <Link 
               href="/spots" 
@@ -113,7 +121,7 @@ export function Navigation() {
               onClick={() => setIsMenuOpen(false)}
             >
               <Camera className="h-4 w-4" />
-              <span>Gallery</span>
+              <span>Galería</span>
             </Link>
             <Link 
               href="/upload" 
@@ -121,7 +129,7 @@ export function Navigation() {
               onClick={() => setIsMenuOpen(false)}
             >
               <Upload className="h-4 w-4" />
-              <span>Upload</span>
+              <span>Subir</span>
             </Link>
           </nav>
         </div>

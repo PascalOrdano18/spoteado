@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Heart, MapPin, Camera, Calendar, Wind, Waves, Search, Filter, Eye } from "lucide-react";
 import { marDelPlataSpots } from "@/data/surfing-spots";
 import { samplePhotos } from "@/data/sample-photos";
+import Link from "next/link";
 
 export function PhotoGallery() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,7 +32,7 @@ export function PhotoGallery() {
   // Filter and sort photos
   const filteredPhotos = useMemo(() => {
     let filtered = samplePhotos.filter(photo => {
-      const matchesSearch = photo.caption.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      const matchesSearch = (photo.caption?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
                            photo.photographerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            photo.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
       
@@ -66,7 +67,7 @@ export function PhotoGallery() {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search photos, photographers, or tags..."
+            placeholder="Buscar fotos, fotógrafos o etiquetas..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -75,10 +76,10 @@ export function PhotoGallery() {
         
         <Select value={selectedSpot} onValueChange={setSelectedSpot}>
           <SelectTrigger className="w-full lg:w-[200px]">
-            <SelectValue placeholder="All Spots" />
+            <SelectValue placeholder="Todos los Spots" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Spots</SelectItem>
+            <SelectItem value="all">Todos los Spots</SelectItem>
             {marDelPlataSpots.map((spot) => (
               <SelectItem key={spot.id} value={spot.id}>
                 {spot.name}
@@ -89,10 +90,10 @@ export function PhotoGallery() {
         
         <Select value={selectedTag} onValueChange={setSelectedTag}>
           <SelectTrigger className="w-full lg:w-[150px]">
-            <SelectValue placeholder="All Tags" />
+            <SelectValue placeholder="Todas las Etiquetas" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Tags</SelectItem>
+            <SelectItem value="all">Todas las Etiquetas</SelectItem>
             {allTags.map((tag) => (
               <SelectItem key={tag} value={tag}>
                 #{tag}
@@ -103,19 +104,19 @@ export function PhotoGallery() {
         
         <Select value={sortBy} onValueChange={setSortBy}>
           <SelectTrigger className="w-full lg:w-[150px]">
-            <SelectValue placeholder="Sort by" />
+            <SelectValue placeholder="Ordenar por" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="newest">Newest First</SelectItem>
-            <SelectItem value="oldest">Oldest First</SelectItem>
-            <SelectItem value="popular">Most Popular</SelectItem>
+            <SelectItem value="newest">Más Recientes</SelectItem>
+            <SelectItem value="oldest">Más Antiguos</SelectItem>
+            <SelectItem value="popular">Más Populares</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       {/* Results count */}
       <div className="text-sm text-muted-foreground">
-        Showing {filteredPhotos.length} of {samplePhotos.length} photos
+Mostrando {filteredPhotos.length} de {samplePhotos.length} fotos
       </div>
 
       {/* Photo Grid */}
@@ -128,9 +129,9 @@ export function PhotoGallery() {
       {filteredPhotos.length === 0 && (
         <div className="text-center py-12">
           <Filter className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-lg font-medium mb-2">No photos found</h3>
+          <h3 className="text-lg font-medium mb-2">No se encontraron fotos</h3>
           <p className="text-muted-foreground">
-            Try adjusting your search terms or filters
+            Intenta ajustar tus términos de búsqueda o filtros
           </p>
         </div>
       )}
@@ -156,7 +157,13 @@ function PhotoCard({ photo }: { photo: SpotPhoto }) {
         <div className="absolute bottom-2 left-2 right-2 text-white transform translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
           <div className="flex items-center text-xs mb-1">
             <MapPin className="h-3 w-3 mr-1" />
-            <span>{spot?.name}</span>
+            {spot ? (
+              <Link href={`/spots/${spot.id}`} className="hover:text-blue-300 transition-colors">
+                {spot.name}
+              </Link>
+            ) : (
+              <span>Spot desconocido</span>
+            )}
           </div>
           <div className="flex items-center text-xs">
             <Camera className="h-3 w-3 mr-1" />
@@ -240,11 +247,17 @@ function PhotoModal({ photo, spot }: { photo: SpotPhoto; spot: any }) {
         
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <h4 className="font-medium mb-2">Photo Details</h4>
+                          <h4 className="font-medium mb-2">Detalles de la Foto</h4>
             <div className="space-y-2 text-sm">
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 mr-2 text-muted-foreground" />
-                <span>{spot?.name}</span>
+                {spot ? (
+                  <Link href={`/spots/${spot.id}`} className="hover:text-primary transition-colors">
+                    {spot.name}
+                  </Link>
+                ) : (
+                  <span>Spot desconocido</span>
+                )}
               </div>
               <div className="flex items-center">
                 <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
@@ -261,11 +274,11 @@ function PhotoModal({ photo, spot }: { photo: SpotPhoto; spot: any }) {
           
           {photo.conditions.waveHeight && (
             <div>
-              <h4 className="font-medium mb-2">Conditions</h4>
+              <h4 className="font-medium mb-2">Condiciones</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center">
                   <Waves className="h-4 w-4 mr-2 text-muted-foreground" />
-                  <span>{photo.conditions.waveHeight}ft waves</span>
+                  <span>Olas de {photo.conditions.waveHeight} pies</span>
                 </div>
                 {photo.conditions.windSpeed && (
                   <div className="flex items-center">
@@ -275,7 +288,7 @@ function PhotoModal({ photo, spot }: { photo: SpotPhoto; spot: any }) {
                 )}
                 {photo.conditions.weather && (
                   <div className="text-sm">
-                    <span className="font-medium">Weather:</span> {photo.conditions.weather}
+                    <span className="font-medium">Clima:</span> {photo.conditions.weather}
                   </div>
                 )}
               </div>

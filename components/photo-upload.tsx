@@ -108,7 +108,7 @@ export function PhotoUpload() {
     });
     
     setIsSubmitting(false);
-    alert("Photo uploaded successfully! Thank you for contributing to the community.");
+    alert("¡Foto subida exitosamente! Gracias por contribuir a la comunidad.");
   };
 
   const selectedSpot = marDelPlataSpots.find(spot => spot.id === form.spotId);
@@ -120,10 +120,10 @@ export function PhotoUpload() {
         <CardHeader>
           <CardTitle className="flex items-center">
             <Camera className="h-5 w-5 mr-2" />
-            Upload Photo
+            Subir Foto
           </CardTitle>
           <CardDescription>
-            Select a photo of surfers at one of our Mar del Plata spots
+            Selecciona una foto de surfistas en uno de nuestros spots de Mar del Plata
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -162,8 +162,8 @@ export function PhotoUpload() {
               <div className="space-y-4">
                 <Upload className="h-12 w-12 mx-auto text-muted-foreground" />
                 <div>
-                  <p className="text-lg font-medium">Drop your photo here</p>
-                  <p className="text-sm text-muted-foreground">or click to browse</p>
+                  <p className="text-lg font-medium">Arrastra tu foto aquí</p>
+                  <p className="text-sm text-muted-foreground">o haz clic para explorar</p>
                 </div>
                 <Input
                   type="file"
@@ -174,7 +174,7 @@ export function PhotoUpload() {
                 />
                 <Button type="button" variant="outline" asChild>
                   <label htmlFor="file-upload" className="cursor-pointer">
-                    Choose File
+                    Elegir Archivo
                   </label>
                 </Button>
               </div>
@@ -188,13 +188,13 @@ export function PhotoUpload() {
         <CardHeader>
           <CardTitle className="flex items-center">
             <MapPin className="h-5 w-5 mr-2" />
-            Select Surf Spot
+            Seleccionar Spot de Surf
           </CardTitle>
         </CardHeader>
         <CardContent>
           <Select value={form.spotId} onValueChange={(value) => setForm(prev => ({ ...prev, spotId: value }))}>
             <SelectTrigger>
-              <SelectValue placeholder="Choose the surf spot..." />
+              <SelectValue placeholder="Elige el spot de surf..." />
             </SelectTrigger>
             <SelectContent>
               {marDelPlataSpots.map((spot) => (
@@ -220,27 +220,27 @@ export function PhotoUpload() {
       {/* Photographer Info */}
       <Card>
         <CardHeader>
-          <CardTitle>Photographer Information</CardTitle>
+          <CardTitle>Información del Fotógrafo</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor="photographer-name">Name *</Label>
+            <Label htmlFor="photographer-name">Nombre *</Label>
             <Input
               id="photographer-name"
               value={form.photographerName}
               onChange={(e) => setForm(prev => ({ ...prev, photographerName: e.target.value }))}
-              placeholder="Your name"
+              placeholder="Tu nombre"
               required
             />
           </div>
           <div>
-            <Label htmlFor="photographer-email">Email (optional)</Label>
+            <Label htmlFor="photographer-email">Email (opcional)</Label>
             <Input
               id="photographer-email"
               type="email"
               value={form.photographerEmail}
               onChange={(e) => setForm(prev => ({ ...prev, photographerEmail: e.target.value }))}
-              placeholder="your@email.com"
+              placeholder="tu@email.com"
             />
           </div>
         </CardContent>
@@ -249,27 +249,27 @@ export function PhotoUpload() {
       {/* Photo Details */}
       <Card>
         <CardHeader>
-          <CardTitle>Photo Details</CardTitle>
+          <CardTitle>Detalles de la Foto</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor="caption">Caption</Label>
+            <Label htmlFor="caption">Descripción</Label>
             <Textarea
               id="caption"
               value={form.caption}
               onChange={(e) => setForm(prev => ({ ...prev, caption: e.target.value }))}
-              placeholder="Describe the photo, mention surfers if you know them..."
+              placeholder="Describe la foto, menciona a los surfistas si los conoces..."
               rows={3}
             />
           </div>
           
           <div>
-            <Label>Tags</Label>
+            <Label>Etiquetas</Label>
             <div className="flex gap-2 mb-2">
               <Input
                 value={newTag}
                 onChange={(e) => setNewTag(e.target.value)}
-                placeholder="Add a tag..."
+                placeholder="Agregar etiqueta..."
                 onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
               />
               <Button type="button" variant="outline" onClick={addTag}>
@@ -285,7 +285,7 @@ export function PhotoUpload() {
               ))}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
-              Examples: barrel, air, beginner, sunset, big waves
+              Ejemplos: tubo, aéreo, principiante, atardecer, olas grandes
             </p>
           </div>
         </CardContent>
@@ -296,15 +296,15 @@ export function PhotoUpload() {
         <CardHeader>
           <CardTitle className="flex items-center">
             <Waves className="h-5 w-5 mr-2" />
-            Conditions (optional)
+            Condiciones (opcional)
           </CardTitle>
           <CardDescription>
-            Help other surfers by sharing the conditions when this photo was taken
+            Ayuda a otros surfistas compartiendo las condiciones cuando se tomó esta foto
           </CardDescription>
         </CardHeader>
         <CardContent className="grid md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="wave-height">Wave Height (ft)</Label>
+            <Label htmlFor="wave-height">Altura de Olas (pies)</Label>
             <Input
               id="wave-height"
               type="number"
@@ -319,7 +319,7 @@ export function PhotoUpload() {
           </div>
           
           <div>
-            <Label htmlFor="wind-speed">Wind Speed (km/h)</Label>
+            <Label htmlFor="wind-speed">Velocidad del Viento (km/h)</Label>
             <Input
               id="wind-speed"
               type="number"
@@ -333,7 +333,7 @@ export function PhotoUpload() {
           </div>
           
           <div>
-            <Label htmlFor="wind-direction">Wind Direction</Label>
+            <Label htmlFor="wind-direction">Dirección del Viento</Label>
             <Select
               value={form.conditions.windDirection}
               onValueChange={(value) => setForm(prev => ({
@@ -342,23 +342,23 @@ export function PhotoUpload() {
               }))}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select direction..." />
+                <SelectValue placeholder="Seleccionar dirección..." />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="N">North</SelectItem>
-                <SelectItem value="NE">Northeast</SelectItem>
-                <SelectItem value="E">East</SelectItem>
-                <SelectItem value="SE">Southeast</SelectItem>
-                <SelectItem value="S">South</SelectItem>
-                <SelectItem value="SW">Southwest</SelectItem>
-                <SelectItem value="W">West</SelectItem>
-                <SelectItem value="NW">Northwest</SelectItem>
+                <SelectItem value="N">Norte</SelectItem>
+                <SelectItem value="NE">Noreste</SelectItem>
+                <SelectItem value="E">Este</SelectItem>
+                <SelectItem value="SE">Sureste</SelectItem>
+                <SelectItem value="S">Sur</SelectItem>
+                <SelectItem value="SW">Suroeste</SelectItem>
+                <SelectItem value="W">Oeste</SelectItem>
+                <SelectItem value="NW">Noroeste</SelectItem>
               </SelectContent>
             </Select>
           </div>
           
           <div>
-            <Label htmlFor="weather">Weather</Label>
+            <Label htmlFor="weather">Clima</Label>
             <Select
               value={form.conditions.weather}
               onValueChange={(value) => setForm(prev => ({
@@ -367,13 +367,13 @@ export function PhotoUpload() {
               }))}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Select weather..." />
+                <SelectValue placeholder="Seleccionar clima..." />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Sunny">Sunny</SelectItem>
-                <SelectItem value="Cloudy">Cloudy</SelectItem>
-                <SelectItem value="Rainy">Rainy</SelectItem>
-                <SelectItem value="Stormy">Stormy</SelectItem>
+                <SelectItem value="Sunny">Soleado</SelectItem>
+                <SelectItem value="Cloudy">Nublado</SelectItem>
+                <SelectItem value="Rainy">Lluvioso</SelectItem>
+                <SelectItem value="Stormy">Tormentoso</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -390,12 +390,12 @@ export function PhotoUpload() {
         {isSubmitting ? (
           <>
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-            Uploading...
+            Subiendo...
           </>
         ) : (
           <>
             <Upload className="h-4 w-4 mr-2" />
-            Upload Photo
+            Subir Foto
           </>
         )}
       </Button>

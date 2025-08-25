@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SPOTEADO - Mar del Plata Surf Spots",
-  description: "Share and discover surfing spots and photos in Mar del Plata, Argentina",
+  title: "SPOTEADO - Spots de Surf de Mar del Plata",
+  description: "Comparte y descubre spots de surf y fotos en Mar del Plata, Argentina",
 };
 
 export default function RootLayout({

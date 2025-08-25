@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Waves, Wind, Compass, Search, Filter } from "lucide-react";
+import Link from "next/link";
 
 interface SpotGridProps {
   spots: SurfingSpot[];
@@ -29,10 +30,10 @@ export function SpotGrid({ spots }: SpotGridProps) {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Beginner': return 'bg-blue-500 hover:bg-blue-600';
-      case 'Intermediate': return 'bg-yellow-500 hover:bg-yellow-600';
-      case 'Advanced': return 'bg-orange-500 hover:bg-orange-600';
-      case 'Expert': return 'bg-red-500 hover:bg-red-600';
+      case 'Principiante': return 'bg-blue-500 hover:bg-blue-600';
+      case 'Intermedio': return 'bg-yellow-500 hover:bg-yellow-600';
+      case 'Avanzado': return 'bg-orange-500 hover:bg-orange-600';
+      case 'Experto': return 'bg-red-500 hover:bg-red-600';
       default: return 'bg-gray-500 hover:bg-gray-600';
     }
   };
@@ -44,7 +45,7 @@ export function SpotGrid({ spots }: SpotGridProps) {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search spots..."
+            placeholder="Buscar spots..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -53,34 +54,34 @@ export function SpotGrid({ spots }: SpotGridProps) {
         
         <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
           <SelectTrigger className="w-full md:w-[180px]">
-            <SelectValue placeholder="Difficulty" />
+            <SelectValue placeholder="Dificultad" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Difficulties</SelectItem>
-            <SelectItem value="Beginner">Beginner</SelectItem>
-            <SelectItem value="Intermediate">Intermediate</SelectItem>
-            <SelectItem value="Advanced">Advanced</SelectItem>
-            <SelectItem value="Expert">Expert</SelectItem>
+            <SelectItem value="all">Todas las Dificultades</SelectItem>
+            <SelectItem value="Principiante">Principiante</SelectItem>
+            <SelectItem value="Intermedio">Intermedio</SelectItem>
+            <SelectItem value="Avanzado">Avanzado</SelectItem>
+            <SelectItem value="Experto">Experto</SelectItem>
           </SelectContent>
         </Select>
         
         <Select value={waveTypeFilter} onValueChange={setWaveTypeFilter}>
           <SelectTrigger className="w-full md:w-[180px]">
-            <SelectValue placeholder="Wave Type" />
+            <SelectValue placeholder="Tipo de Ola" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Wave Types</SelectItem>
-            <SelectItem value="Beach Break">Beach Break</SelectItem>
-            <SelectItem value="Point Break">Point Break</SelectItem>
-            <SelectItem value="Reef Break">Reef Break</SelectItem>
-            <SelectItem value="River Mouth">River Mouth</SelectItem>
+            <SelectItem value="all">Todos los Tipos de Ola</SelectItem>
+            <SelectItem value="Rompiente de Playa">Rompiente de Playa</SelectItem>
+            <SelectItem value="Rompiente de Punta">Rompiente de Punta</SelectItem>
+            <SelectItem value="Rompiente de Arrecife">Rompiente de Arrecife</SelectItem>
+            <SelectItem value="Desembocadura">Desembocadura</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       {/* Results count */}
       <div className="text-sm text-muted-foreground">
-        Showing {filteredSpots.length} of {spots.length} spots
+Mostrando {filteredSpots.length} de {spots.length} spots
       </div>
 
       {/* Spots Grid */}
@@ -93,9 +94,9 @@ export function SpotGrid({ spots }: SpotGridProps) {
       {filteredSpots.length === 0 && (
         <div className="text-center py-12">
           <Filter className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-lg font-medium mb-2">No spots found</h3>
+          <h3 className="text-lg font-medium mb-2">No se encontraron spots</h3>
           <p className="text-muted-foreground">
-            Try adjusting your search terms or filters
+            Intenta ajustar tus términos de búsqueda o filtros
           </p>
         </div>
       )}
@@ -137,7 +138,7 @@ function SpotCard({
         <div className="space-y-2">
           <div className="flex items-center text-xs text-muted-foreground">
             <Wind className="h-3 w-3 mr-2" />
-            <span className="font-medium mr-2">Best Wind:</span>
+            <span className="font-medium mr-2">Mejor Viento:</span>
             <div className="flex flex-wrap gap-1">
               {spot.bestConditions.windDirection.slice(0, 3).map((direction) => (
                 <Badge key={direction} variant="outline" className="text-xs px-1 py-0">
@@ -149,7 +150,7 @@ function SpotCard({
           
           <div className="flex items-center text-xs text-muted-foreground">
             <Compass className="h-3 w-3 mr-2" />
-            <span className="font-medium mr-2">Best Swell:</span>
+            <span className="font-medium mr-2">Mejor Swell:</span>
             <div className="flex flex-wrap gap-1">
               {spot.bestConditions.swellDirection.slice(0, 3).map((direction) => (
                 <Badge key={direction} variant="outline" className="text-xs px-1 py-0">
@@ -161,7 +162,7 @@ function SpotCard({
         </div>
         
         <div>
-          <div className="text-xs font-medium mb-1">Facilities:</div>
+          <div className="text-xs font-medium mb-1">Instalaciones:</div>
           <div className="flex flex-wrap gap-1">
             {spot.facilities.slice(0, 4).map((facility) => (
               <Badge key={facility} variant="secondary" className="text-xs">
@@ -178,7 +179,7 @@ function SpotCard({
         
         {spot.hazards.length > 0 && (
           <div>
-            <div className="text-xs font-medium mb-1 text-destructive">Hazards:</div>
+            <div className="text-xs font-medium mb-1 text-destructive">Peligros:</div>
             <div className="flex flex-wrap gap-1">
               {spot.hazards.slice(0, 2).map((hazard) => (
                 <Badge key={hazard} variant="destructive" className="text-xs">
@@ -194,9 +195,11 @@ function SpotCard({
           </div>
         )}
         
-        <Button variant="outline" size="sm" className="w-full">
-          View Details
-        </Button>
+        <Link href={`/spots/${spot.id}`} className="w-full">
+          <Button variant="outline" size="sm" className="w-full">
+            Ver Detalles
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   );

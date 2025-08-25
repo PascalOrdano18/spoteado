@@ -4,121 +4,121 @@ export const marDelPlataSpots: SurfingSpot[] = [
   {
     id: 'playa-grande',
     name: 'Playa Grande',
-    description: 'The most popular beach in Mar del Plata with consistent waves and good facilities.',
+    description: 'La playa más popular de Mar del Plata con olas consistentes y buenas instalaciones.',
     coordinates: { lat: -38.0054, lng: -57.5426 },
-    difficulty: 'Beginner',
-    waveType: 'Beach Break',
+    difficulty: 'Principiante',
+    waveType: 'Rompiente de Playa',
     bestConditions: {
-      windDirection: ['W', 'NW', 'SW'],
+      windDirection: ['O', 'NO', 'SO'],
       swellDirection: ['E', 'SE', 'S'],
-      tideHeight: ['Mid', 'High']
+      tideHeight: ['Media', 'Alta']
     },
-    facilities: ['Parking', 'Restaurants', 'Surf Shops', 'Showers', 'Lifeguards'],
-    hazards: ['Crowds', 'Rocks at low tide']
+    facilities: ['Estacionamiento', 'Restaurantes', 'Tiendas de Surf', 'Duchas', 'Guardavidas'],
+    hazards: ['Multitudes', 'Rocas en marea baja']
   },
   {
     id: 'varese',
     name: 'Playa Varese',
-    description: 'A quieter beach break with good waves for intermediate surfers.',
+    description: 'Una rompiente de playa más tranquila con buenas olas para surfistas intermedios.',
     coordinates: { lat: -38.0089, lng: -57.5389 },
-    difficulty: 'Intermediate',
-    waveType: 'Beach Break',
+    difficulty: 'Intermedio',
+    waveType: 'Rompiente de Playa',
     bestConditions: {
-      windDirection: ['W', 'NW'],
+      windDirection: ['O', 'NO'],
       swellDirection: ['E', 'SE'],
-      tideHeight: ['Mid', 'Low']
+      tideHeight: ['Media', 'Baja']
     },
-    facilities: ['Parking', 'Beach Clubs', 'Restaurants'],
-    hazards: ['Strong currents', 'Rocks']
+    facilities: ['Estacionamiento', 'Clubes de Playa', 'Restaurantes'],
+    hazards: ['Corrientes fuertes', 'Rocas']
   },
   {
     id: 'la-perla',
     name: 'La Perla',
-    description: 'Historic neighborhood beach with consistent small waves, perfect for beginners.',
+    description: 'Playa del barrio histórico con olas pequeñas consistentes, perfecta para principiantes.',
     coordinates: { lat: -38.0125, lng: -57.5342 },
-    difficulty: 'Beginner',
-    waveType: 'Beach Break',
+    difficulty: 'Principiante',
+    waveType: 'Rompiente de Playa',
     bestConditions: {
-      windDirection: ['W', 'NW', 'SW'],
+      windDirection: ['O', 'NO', 'SO'],
       swellDirection: ['E', 'SE'],
-      tideHeight: ['All tides']
+      tideHeight: ['Todas las mareas']
     },
-    facilities: ['Historic Casino', 'Restaurants', 'Promenade', 'Parking'],
-    hazards: ['Crowds in summer']
+    facilities: ['Casino Histórico', 'Restaurantes', 'Paseo Marítimo', 'Estacionamiento'],
+    hazards: ['Multitudes en verano']
   },
   {
     id: 'playa-popular',
     name: 'Playa Popular',
-    description: 'A local favorite with good waves and less crowds than the main beaches.',
+    description: 'Una favorita local con buenas olas y menos multitudes que las playas principales.',
     coordinates: { lat: -38.0198, lng: -57.5278 },
-    difficulty: 'Intermediate',
-    waveType: 'Beach Break',
+    difficulty: 'Intermedio',
+    waveType: 'Rompiente de Playa',
     bestConditions: {
-      windDirection: ['W', 'NW'],
+      windDirection: ['O', 'NO'],
       swellDirection: ['E', 'SE', 'S'],
-      tideHeight: ['Mid', 'High']
+      tideHeight: ['Media', 'Alta']
     },
-    facilities: ['Parking', 'Local Restaurants'],
-    hazards: ['Rocky areas', 'Limited facilities']
+    facilities: ['Estacionamiento', 'Restaurantes Locales'],
+    hazards: ['Áreas rocosas', 'Instalaciones limitadas']
   },
   {
     id: 'cabo-corrientes',
     name: 'Cabo Corrientes',
-    description: 'Rocky point with powerful waves for advanced surfers. Best in big swells.',
+    description: 'Punta rocosa con olas poderosas para surfistas avanzados. Mejor con swells grandes.',
     coordinates: { lat: -38.0856, lng: -57.5167 },
-    difficulty: 'Advanced',
-    waveType: 'Point Break',
+    difficulty: 'Avanzado',
+    waveType: 'Rompiente de Punta',
     bestConditions: {
-      windDirection: ['W', 'NW'],
+      windDirection: ['O', 'NO'],
       swellDirection: ['S', 'SE'],
-      tideHeight: ['Mid', 'Low']
+      tideHeight: ['Media', 'Baja']
     },
-    facilities: ['Limited parking', 'Scenic views'],
-    hazards: ['Sharp rocks', 'Strong currents', 'Difficult access']
+    facilities: ['Estacionamiento limitado', 'Vistas escénicas'],
+    hazards: ['Rocas filosas', 'Corrientes fuertes', 'Acceso difícil']
   },
   {
     id: 'playa-serena',
     name: 'Playa Serena',
-    description: 'A more secluded beach south of the city with clean waves.',
+    description: 'Una playa más apartada al sur de la ciudad con olas limpias.',
     coordinates: { lat: -38.0267, lng: -57.5234 },
-    difficulty: 'Intermediate',
-    waveType: 'Beach Break',
+    difficulty: 'Intermedio',
+    waveType: 'Rompiente de Playa',
     bestConditions: {
-      windDirection: ['W', 'NW', 'SW'],
+      windDirection: ['O', 'NO', 'SO'],
       swellDirection: ['E', 'SE'],
-      tideHeight: ['All tides']
+      tideHeight: ['Todas las mareas']
     },
-    facilities: ['Parking', 'Beach bars'],
-    hazards: ['Isolated location', 'No lifeguards']
+    facilities: ['Estacionamiento', 'Bares de playa'],
+    hazards: ['Ubicación aislada', 'Sin guardavidas']
   },
   {
     id: 'waikiki',
     name: 'Waikiki',
-    description: 'Popular surf spot with consistent waves and good vibes.',
+    description: 'Spot de surf popular con olas consistentes y buena onda.',
     coordinates: { lat: -38.0445, lng: -57.5089 },
-    difficulty: 'Intermediate',
-    waveType: 'Beach Break',
+    difficulty: 'Intermedio',
+    waveType: 'Rompiente de Playa',
     bestConditions: {
-      windDirection: ['W', 'NW'],
+      windDirection: ['O', 'NO'],
       swellDirection: ['E', 'SE', 'S'],
-      tideHeight: ['Mid', 'High']
+      tideHeight: ['Media', 'Alta']
     },
-    facilities: ['Surf schools', 'Equipment rental', 'Restaurants'],
-    hazards: ['Crowds', 'Beginners in the water']
+    facilities: ['Escuelas de surf', 'Alquiler de equipos', 'Restaurantes'],
+    hazards: ['Multitudes', 'Principiantes en el agua']
   },
   {
     id: 'playa-chica',
     name: 'Playa Chica',
-    description: 'Small protected bay perfect for learning and small wave sessions.',
+    description: 'Pequeña bahía protegida perfecta para aprender y sesiones de olas pequeñas.',
     coordinates: { lat: -38.0034, lng: -57.5445 },
-    difficulty: 'Beginner',
-    waveType: 'Beach Break',
+    difficulty: 'Principiante',
+    waveType: 'Rompiente de Playa',
     bestConditions: {
-      windDirection: ['All directions'],
+      windDirection: ['Todas las direcciones'],
       swellDirection: ['E', 'SE'],
-      tideHeight: ['All tides']
+      tideHeight: ['Todas las mareas']
     },
-    facilities: ['Calm waters', 'Easy access', 'Nearby amenities'],
-    hazards: ['Very small waves', 'Overcrowded in summer']
+    facilities: ['Aguas tranquilas', 'Fácil acceso', 'Servicios cercanos'],
+    hazards: ['Olas muy pequeñas', 'Muy concurrida en verano']
   }
 ];
