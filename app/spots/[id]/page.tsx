@@ -54,7 +54,7 @@ export default function SpotPage({ params }: SpotPageProps) {
     <div className="container mx-auto px-4 py-8 space-y-8">
       {/* Header */}
       <div className="flex items-center gap-4 mb-6">
-        <Link href="/spots">
+        <Link href="/#spots-section">
           <Button variant="outline" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Volver a Spots

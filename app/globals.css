@@ -136,3 +136,53 @@
                       radial-gradient(circle at 40% 40%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
   }
 }
+
+/* Ensure Leaflet map works properly within its container */
+@layer components {
+  .leaflet-container {
+    position: relative !important;
+    z-index: 1 !important;
+    background: var(--background) !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+  
+  .leaflet-control-container {
+    z-index: 10 !important;
+  }
+  
+  .leaflet-popup-pane {
+    z-index: 20 !important;
+  }
+  
+  .leaflet-tooltip-pane {
+    z-index: 15 !important;
+  }
+  
+  /* Fix for any content bleeding through the map */
+  .leaflet-tile-pane {
+    z-index: 1 !important;
+  }
+  
+  .leaflet-overlay-pane {
+    z-index: 2 !important;
+  }
+  
+  .leaflet-marker-pane {
+    z-index: 3 !important;
+  }
+  
+  /* Force solid background on all leaflet elements */
+  .leaflet-container,
+  .leaflet-container * {
+    background-clip: padding-box !important;
+  }
+  
+  /* Force all map content to be contained within its parent */
+  .leaflet-container > * {
+    position: relative !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+}

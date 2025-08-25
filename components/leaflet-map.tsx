@@ -26,7 +26,19 @@ export default function LeafletMap({ spots, onSpotSelect }: LeafletMapProps) {
     if (!mapContainerRef.current || mapRef.current) return;
 
     // Initialize map centered on Mar del Plata
-    const map = L.map(mapContainerRef.current).setView([-38.0054, -57.5426], 12);
+    const map = L.map(mapContainerRef.current, {
+      zoomControl: true,
+      dragging: true,
+      touchZoom: true,
+      doubleClickZoom: true,
+      scrollWheelZoom: true,
+      boxZoom: true,
+      keyboard: true,
+      attributionControl: true,
+      fadeAnimation: false,
+      zoomAnimation: false,
+      markerZoomAnimation: false
+    }).setView([-38.0054, -57.5426], 12);
     mapRef.current = map;
 
     // Add tile layer - using dark theme compatible tiles
@@ -112,6 +124,27 @@ export default function LeafletMap({ spots, onSpotSelect }: LeafletMapProps) {
     };
   }, [spots, onSpotSelect]);
 
+  // Handle map resize to ensure it fits properly in its container
+  useEffect(() => {
+    const handleResize = () => {
+      if (mapRef.current && mapContainerRef.current) {
+        setTimeout(() => {
+          mapRef.current?.invalidateSize({ animate: false });
+        }, 100);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+    // Trigger resize after map is loaded
+    const timer = setTimeout(handleResize, 300);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timer);
+    };
+  }, []);
+
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'Beginner': return '#3b82f6'; // blue-500
@@ -125,8 +158,12 @@ export default function LeafletMap({ spots, onSpotSelect }: LeafletMapProps) {
   return (
     <div 
       ref={mapContainerRef} 
-      className="w-full h-full"
-      style={{ minHeight: "400px" }}
+      className="w-full h-full bg-background"
+      style={{ 
+        position: 'relative',
+        zIndex: 1,
+        backgroundColor: 'var(--background)'
+      }}
     />
   );
 }

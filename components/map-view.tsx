@@ -11,7 +11,7 @@ import { Waves, MapPin, Wind, Compass } from "lucide-react";
 const DynamicMap = dynamic(() => import("@/components/leaflet-map"), {
   ssr: false,
   loading: () => (
-    <div className="h-96 bg-muted rounded-lg flex items-center justify-center">
+    <div className="h-full bg-muted rounded-lg flex items-center justify-center">
       <div className="text-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
         <p className="text-sm text-muted-foreground">Cargando mapa...</p>
@@ -28,36 +28,51 @@ export function MapView({ spots }: MapViewProps) {
   const [selectedSpot, setSelectedSpot] = useState<SurfingSpot | null>(null);
 
   return (
-    <div className="space-y-6">
-      {/* Map */}
-      <div className="h-96 lg:h-[500px] rounded-lg overflow-hidden border shadow-lg">
-        <DynamicMap spots={spots} onSpotSelect={setSelectedSpot} />
+    <div className="h-full w-full p-6">
+      {/* Title */}
+      <div className="mb-6">
+        <h2 className="text-3xl font-bold">Mapa Interactivo</h2>
+        <p className="text-muted-foreground">Explora los spots de surf y haz clic en un marcador para ver detalles</p>
       </div>
       
-      {/* Selected Spot Details & Legend */}
-      <div className="grid lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
+      {/* Map and Spot Details Side by Side - Full Height */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-12rem)]">
+        {/* Map - Left Half */}
+        <div className="rounded-lg overflow-hidden border shadow-lg bg-background relative">
+          <DynamicMap spots={spots} onSpotSelect={setSelectedSpot} />
+        </div>
+        
+        {/* Spot Details - Right Half */}
+        <div className="flex flex-col">
           {selectedSpot ? (
             <SpotDetails spot={selectedSpot} />
           ) : (
-            <Card>
+            <Card className="h-full">
               <CardHeader>
-                              <CardTitle className="flex items-center">
-                <MapPin className="h-5 w-5 mr-2 text-primary" />
-                Selecciona un Spot
-              </CardTitle>
-              <CardDescription>
-                Haz clic en cualquier marcador del mapa para ver información detallada sobre ese spot de surf.
-              </CardDescription>
+                <CardTitle className="flex items-center">
+                  <MapPin className="h-5 w-5 mr-2 text-primary" />
+                  Selecciona un Spot
+                </CardTitle>
+                <CardDescription>
+                  Haz clic en cualquier marcador del mapa para ver información detallada sobre ese spot de surf.
+                </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1 overflow-y-auto">
                 <div className="text-sm text-muted-foreground">
-                  <p className="mb-2">Spots disponibles ({spots.length}):</p>
-                  <div className="grid grid-cols-2 gap-2">
+                  <p className="mb-4">Spots disponibles ({spots.length}):</p>
+                  <div className="grid grid-cols-1 gap-2">
                     {spots.map((spot) => (
-                      <div key={spot.id} className="flex items-center">
-                        <div className="w-2 h-2 bg-primary rounded-full mr-2 flex-shrink-0" />
-                        <span className="truncate">{spot.name}</span>
+                      <div key={spot.id} className="flex items-center p-2 rounded hover:bg-muted/50 transition-colors">
+                        <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0" />
+                        <div className="flex-1">
+                          <span className="font-medium">{spot.name}</span>
+                          <div className="flex items-center gap-2 mt-1">
+                            <Badge variant="outline" className="text-xs">
+                              {spot.difficulty}
+                            </Badge>
+                            <span className="text-xs text-muted-foreground">{spot.waveType}</span>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -65,32 +80,6 @@ export function MapView({ spots }: MapViewProps) {
               </CardContent>
             </Card>
           )}
-        </div>
-        
-        <div>
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Leyenda de Dificultad</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex items-center text-sm">
-                <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
-                <span>Principiante</span>
-              </div>
-              <div className="flex items-center text-sm">
-                <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-                <span>Intermedio</span>
-              </div>
-              <div className="flex items-center text-sm">
-                <div className="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
-                <span>Avanzado</span>
-              </div>
-              <div className="flex items-center text-sm">
-                <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-                <span>Solo Expertos</span>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>
@@ -109,10 +98,10 @@ function SpotDetails({ spot }: { spot: SurfingSpot }) {
   };
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="h-full flex flex-col">
+      <CardHeader className="flex-shrink-0">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center">
+          <CardTitle className="flex items-center text-lg">
             <MapPin className="h-5 w-5 mr-2 text-primary" />
             {spot.name}
           </CardTitle>
@@ -125,7 +114,7 @@ function SpotDetails({ spot }: { spot: SurfingSpot }) {
         </div>
         <CardDescription>{spot.description}</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="flex-1 overflow-y-auto space-y-4">
         <div>
           <div className="flex items-center text-sm font-medium mb-2">
             <Waves className="h-4 w-4 mr-2" />
