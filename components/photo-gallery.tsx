@@ -145,47 +145,39 @@ function PhotoCard({ photo }: { photo: SpotPhoto }) {
 
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
-      <div className="relative aspect-square overflow-hidden">
-        <img
-          src={photo.imageUrl}
-          alt={photo.caption}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* Overlay info */}
-        <div className="absolute bottom-2 left-2 right-2 text-white transform translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <div className="flex items-center text-xs mb-1">
-            <MapPin className="h-3 w-3 mr-1" />
-            {spot ? (
-              <Link href={`/spots/${spot.id}`} className="hover:text-blue-300 transition-colors">
-                {spot.name}
-              </Link>
-            ) : (
-              <span>Spot desconocido</span>
-            )}
+      <Dialog>
+        <DialogTrigger asChild>
+          <div className="relative aspect-square overflow-hidden cursor-pointer">
+            <img
+              src={photo.imageUrl}
+              alt={photo.caption}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            {/* Overlay info */}
+            <div className="absolute bottom-2 left-2 right-2 text-white transform translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <div className="flex items-center text-xs mb-1">
+                <MapPin className="h-3 w-3 mr-1" />
+                {spot ? (
+                  <span className="hover:text-blue-300 transition-colors">
+                    {spot.name}
+                  </span>
+                ) : (
+                  <span>Spot desconocido</span>
+                )}
+              </div>
+              <div className="flex items-center text-xs">
+                <Camera className="h-3 w-3 mr-1" />
+                <span>{photo.photographerName}</span>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center text-xs">
-            <Camera className="h-3 w-3 mr-1" />
-            <span>{photo.photographerName}</span>
-          </div>
-        </div>
-
-        {/* View button */}
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              size="sm"
-              className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
-              <Eye className="h-4 w-4" />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
-            <PhotoModal photo={photo} spot={spot} />
-          </DialogContent>
-        </Dialog>
-      </div>
+        </DialogTrigger>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
+          <PhotoModal photo={photo} spot={spot} />
+        </DialogContent>
+      </Dialog>
       
       <CardContent className="p-3">
         <div className="flex items-center justify-between mb-2">
