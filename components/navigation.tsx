@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/components/auth-provider";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import  { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { 
   Map, 
   Camera, 
@@ -18,6 +21,7 @@ import { GlobalSearch } from "@/components/global-search";
 
 export function Navigation() {
   const { theme, setTheme } = useTheme();
+  const { user, signOut } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -147,13 +151,15 @@ export function Navigation() {
             <Camera className="h-4 w-4" />
             <span>Galería</span>
           </Link>
-          <Link 
-            href="/upload" 
-            className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Upload className="h-4 w-4" />
-            <span>Subir</span>
-          </Link>
+          {user && (
+            <Link 
+              href="/upload" 
+              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Upload className="h-4 w-4" />
+              <span>Subir</span>
+            </Link>
+          )}
         </nav>
 
         {/* Actions - Right Side */}
@@ -176,6 +182,37 @@ export function Navigation() {
             <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
           </Button>
+          
+          {/* Auth Section */}
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="relative">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={user.user_metadata?.avatar_url} />
+                    <AvatarFallback>
+                      {user.email?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                  <Link href="/profile">Mi Perfil</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/my-photos">Mis Fotos</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={signOut}>
+                  Cerrar Sesión
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button asChild>
+              <Link href="/login">Iniciar Sesión</Link>
+            </Button>
+          )}
           
           {/* Mobile menu button */}
           <Button
@@ -221,14 +258,53 @@ export function Navigation() {
               <Camera className="h-4 w-4" />
               <span>Galería</span>
             </Link>
-            <Link 
-              href="/upload" 
-              className="flex items-center space-x-2 py-2 text-muted-foreground hover:text-foreground transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Upload className="h-4 w-4" />
-              <span>Subir</span>
-            </Link>
+            {user && (
+              <Link 
+                href="/upload" 
+                className="flex items-center space-x-2 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Upload className="h-4 w-4" />
+                <span>Subir</span>
+              </Link>
+            )}
+            
+            {/* Mobile Auth Section */}
+            {user ? (
+              <>
+                <Link 
+                  href="/profile" 
+                  className="flex items-center space-x-2 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span>Mi Perfil</span>
+                </Link>
+                <Link 
+                  href="/my-photos" 
+                  className="flex items-center space-x-2 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span>Mis Fotos</span>
+                </Link>
+                <button 
+                  className="flex items-center space-x-2 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer w-full text-left"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    signOut();
+                  }}
+                >
+                  <span>Cerrar Sesión</span>
+                </button>
+              </>
+            ) : (
+              <Link 
+                href="/login" 
+                className="flex items-center space-x-2 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span>Iniciar Sesión</span>
+              </Link>
+            )}
           </nav>
         </div>
       )}

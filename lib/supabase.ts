@@ -1,6 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { createClientComponentClient, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import type { Database } from "@/types/supabase";
 
 // 🌐 URLs y Keys
@@ -17,9 +16,7 @@ export const createClientSupabase = () => {
 };
 
 // 🖥️ Cliente para Server Components (getServerSideProps, etc.)
-export const createServerSupabase = () => {
-  return createServerComponentClient<Database>({ cookies });
-};
+// Esta función se movió a lib/supabase-server.ts para evitar conflictos con Client Components
 
 // 🔑 Cliente Admin (para API routes con permisos completos)
 export const createAdminSupabase = () => {
