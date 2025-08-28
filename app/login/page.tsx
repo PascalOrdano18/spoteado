@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { createClientSupabase } from "@/lib/supabase";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { createClientSupabase } from "@/lib/supabase-client-provider";
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -18,7 +19,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   
   const router = useRouter();
-  const supabase = createClientSupabase();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +26,7 @@ export default function LoginPage() {
     setError("");
 
     try {
+      const supabase = createClientSupabase();
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,

@@ -2,11 +2,9 @@ import { createServerSupabase } from "@/lib/supabase-server";
 import { NextRequest, NextResponse } from "next/server";
 import { Database } from "@/types/supabase";
 
-
-
 export async function GET(req: NextRequest){
     try {
-        const supabase = createServerSupabase();
+        const supabase = await createServerSupabase();
         const { searchParams } = new URL(req.url);
 
         const q = searchParams.get("q") || "";

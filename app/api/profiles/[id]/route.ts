@@ -1,17 +1,13 @@
 
-import { supabase } from "@/lib/supabase";
 import { createServerSupabase } from "@/lib/supabase-server";
-
 import { Database } from "@/types/supabase";
 import { NextRequest, NextResponse } from "next/server";
 
 type ProfileUpdate = Database['public']['Tables']['profiles']['Update'];
 
-// const supabase = createServerSupabase();
-
-
 export async function GET(req: NextRequest, { params } : { params: { id: string } }){
     const { id } = params;
+    const supabase = await createServerSupabase();
 
     try {
         const { data, error } = await supabase
@@ -29,11 +25,22 @@ export async function GET(req: NextRequest, { params } : { params: { id: string 
     };
 }
 
-
 // para editar el perfil
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }){
     const { id } = params;
     const body: ProfileUpdate = await req.json();
+    const supabase = await createServerSupabase();
+
+    // Check authentication
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is editing their own profile
+    if (session.user.id !== id) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
     try{   
         const { data, error } = await supabase 
