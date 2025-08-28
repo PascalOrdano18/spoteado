@@ -1,8 +1,8 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import type { Database } from "@/types/supabase";
 
-// 🖥️ Cliente para Server Components (getServerSideProps, etc.)
+// 🖥️ Cliente para API Routes (Route Handlers)
 export const createServerSupabase = () => {
-  return createServerComponentClient<Database>({ cookies });
+  return createClientComponentClient<Database>();
 };

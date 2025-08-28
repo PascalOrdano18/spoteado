@@ -6,6 +6,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
+
 export type Database = {
   public: {
     Tables: {
@@ -600,7 +601,7 @@ export type PhotoInsert = TablesInsert<'photos'>
 export type PhotoUpdate = TablesUpdate<'photos'>
 export type Profile = Tables<'profiles'>
 export type ProfileInsert = TablesInsert<'profiles'>
-export type ProfileUpdate = TablesUpdate<'profiles'>
+//export type ProfileUpdate = TablesUpdate<'profiles'>
 export type Spot = Tables<'spots'>
 export type Tag = Tables<'tags'>
 export type PhotoLike = Tables<'photo_likes'>
@@ -614,3 +615,5 @@ export type WeatherCondition = Enums<'weather_condition'>
 export type WindDirection = Enums<'wind_direction'>
 export type SessionType = Enums<'session_type'>
 export type CrowdLevel = Enums<'crowd_level'>
+
+export type ProfileUpdate = Database['public']['Tables']['profiles']['Update'];
